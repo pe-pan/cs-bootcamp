@@ -14,10 +14,8 @@ operation:
 
     python_action:
       script: |
-        import string
-        from random import *
-        characters = string.ascii_letters + string.punctuation  + string.digits
-        uuid =  "".join(choice(characters) for x in range(randint(8, 16)))
+        import uuid
+        new_uuid = str(uuid.uuid1())
 
     outputs:
       - uuid: ${uuid}
