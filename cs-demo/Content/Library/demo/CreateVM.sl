@@ -34,9 +34,7 @@ flow:
             io.cloudslang.vmware.vcenter.vm.clone_vm:
               - host: '${host}'
               - user: '${username}'
-              - password:
-                  value: ********
-                  sensitive: true
+              - password
               - vm_source_identifier: name
               - vm_source: '${image}'
               - datacenter: '${datacenter}'
@@ -55,9 +53,7 @@ flow:
             io.cloudslang.vmware.vcenter.power_on_vm:
               - host: '${host}'
               - user: '${username}'
-              - password:
-                  value: ********
-                  sensitive: true
+              - password
               - vm_identifier: name
               - vm_name: '${prefix+id}'
               - datacenter: '${datacenter}'
@@ -73,9 +69,7 @@ flow:
             io.cloudslang.vmware.vcenter.util.wait_for_vm_info:
               - host: '${host}'
               - user: '${username}'
-              - password:
-                  value: ********
-                  sensitive: true
+              - password
               - vm_identifier: name
               - vm_name: '${prefix+id}'
               - datacenter: '${datacenter}'
