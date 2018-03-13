@@ -15,7 +15,7 @@ extensions:
   graph:
     steps:
       uuid:
-        x: 171
+        x: 172
         y: 101
         navigate:
           358314a9-4398-84ad-76b3-b1a63992ea8c:
@@ -24,5 +24,5 @@ extensions:
     results:
       SUCCESS:
         18c81420-0c63-41f7-5759-480739e08d92:
-          x: 333
-          y: 103
+          x: 539
+          y: 156
