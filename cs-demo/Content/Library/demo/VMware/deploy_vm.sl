@@ -1,11 +1,19 @@
 namespace: demo.VMware
 flow:
   name: deploy_vm
+  inputs:
+    - host: 10.0.46.10
+    - user: "capa1\\1010-capa1user"
+    - password: Automation123
+    - image: Ubuntu
+    - datacenter: CAPA1 Datacenter
+    - folder: AOS
+    - prefix: petr-
   workflow:
     - unique_vm_name_generator:
         do:
           io.cloudslang.vmware.vcenter.util.unique_vm_name_generator:
-            - vm_name_prefix: petr-
+            - vm_name_prefix: '${prefix}'
         publish:
           - vm_name
         navigate:
@@ -14,16 +22,16 @@ flow:
     - clone_vm:
         do:
           io.cloudslang.vmware.vcenter.vm.clone_vm:
-            - host: 10.0.46.10
-            - user: "capa1\\1010-capa1user"
+            - host: '${host}'
+            - user: '${user}'
             - password:
-                value: Automation123
+                value: '${password}'
                 sensitive: true
             - vm_source_identifier: name
-            - vm_source: Ubuntu
-            - datacenter: CAPA1 Datacenter
+            - vm_source: '${image}'
+            - datacenter: '${datacenter}'
             - vm_name: '${vm_name}'
-            - vm_folder: AOS
+            - vm_folder: '${folder}'
             - mark_as_template: 'false'
             - trust_all_roots: 'true'
             - x_509_hostname_verifier: allow_all
@@ -33,14 +41,14 @@ flow:
     - power_on_vm:
         do:
           io.cloudslang.vmware.vcenter.power_on_vm:
-            - host: 10.0.46.10
-            - user: "CAPA1\\1010-capa1user"
+            - host: '${host}'
+            - user: '${user}'
             - password:
-                value: Automation123
+                value: '${password}'
                 sensitive: true
             - vm_identifier: name
             - vm_name: '${vm_name}'
-            - datacenter: CAPA1 Datacenter
+            - datacenter: '${datacenter}'
             - trust_all_roots: 'true'
             - x_509_hostname_verifier: allow_all
         navigate:
@@ -49,14 +57,14 @@ flow:
     - wait_for_vm_info:
         do:
           io.cloudslang.vmware.vcenter.util.wait_for_vm_info:
-            - host: 10.0.46.10
-            - user: "CAPA1\\1010-capa1user"
+            - host: '${host}'
+            - user: '${user}'
             - password:
-                value: Automation123
+                value: '${password}'
                 sensitive: true
             - vm_identifier: name
             - vm_name: '${vm_name}'
-            - datacenter: CAPA1 Datacenter
+            - datacenter: '${datacenter}'
             - trust_all_roots: 'true'
             - x_509_hostname_verifier: allow_all
         publish:

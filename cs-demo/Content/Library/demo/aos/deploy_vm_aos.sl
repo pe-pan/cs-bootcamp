@@ -25,6 +25,7 @@ flow:
           demo.aos.deploy_wars:
             - tomcat_host: '${ip}'
             - account_service_host: '${ip}'
+            - db_host: '${ip}'
             - username: '${username}'
             - password: '${password}'
         navigate:
@@ -38,7 +39,7 @@ extensions:
     steps:
       deploy_vm:
         x: 86
-        y: 89
+        y: 88
       install_aos:
         x: 247
         y: 104

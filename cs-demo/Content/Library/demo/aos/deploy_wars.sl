@@ -5,9 +5,9 @@ flow:
     - tomcat_host: 10.0.46.54
     - account_service_host:
         default: 10.0.46.54
-        required: false
+        required: true
     - db_host:
-        required: false
+        required: true
     - username: root
     - password: admin@123
     - url: 'http://vmdocker.hcm.demo.local:36980/job/AOS/lastSuccessfulBuild/artifact/'
@@ -20,79 +20,79 @@ flow:
             - password: '${password}'
             - artifact_url: "${url+'accountservice/target/accountservice.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_catalog
     - deploy_catalog:
         do:
           demo.aos.initialize_artifact:
-            - host: '${account_service_host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'catalog/target/catalog.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_mastercredit
     - deploy_mastercredit:
         do:
           demo.aos.initialize_artifact:
-            - host: '${account_service_host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'mastercredit/target/MasterCredit.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_order
     - deploy_order:
         do:
           demo.aos.initialize_artifact:
-            - host: '${account_service_host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'order/target/order.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_root
     - deploy_root:
         do:
           demo.aos.initialize_artifact:
-            - host: '${account_service_host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'root/target/ROOT.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_safepay
     - deploy_safepay:
         do:
           demo.aos.initialize_artifact:
-            - host: '${account_service_host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'safepay/target/SafePay.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_shipex
     - deploy_shipex:
         do:
           demo.aos.initialize_artifact:
-            - host: '${account_service_host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'shipex/target/ShipEx.war'}"
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
-            - parameters: "${get(db_host,tomcat_host)+' postgres admin '+tomcat_host+' '+account_service_host}"
+            - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
