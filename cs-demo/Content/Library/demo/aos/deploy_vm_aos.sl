@@ -38,14 +38,14 @@ extensions:
   graph:
     steps:
       deploy_vm:
-        x: 86
-        y: 88
+        x: 94
+        y: 77
       install_aos:
-        x: 247
-        y: 104
+        x: 243
+        y: 76
       deploy_wars:
-        x: 381
-        y: 104
+        x: 382
+        y: 85
         navigate:
           85994bc5-c076-1c46-c287-3342a88e6bff:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23

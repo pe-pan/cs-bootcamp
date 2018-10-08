@@ -61,25 +61,25 @@ flow:
 extensions:
   graph:
     steps:
+      deploy_2_vms:
+        x: 145
+        y: 34
+      install_java:
+        x: 143
+        y: 161
+      install_tomcat:
+        x: 360
+        y: 159
+      install_postgres:
+        x: 364
+        y: 28
       deploy_wars:
-        x: 133
-        y: 311
+        x: 144
+        y: 290
         navigate:
           8d48cf49-b8e3-8b3d-2054-a44f2582efc2:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
             port: SUCCESS
-      install_java:
-        x: 105
-        y: 187
-      install_tomcat:
-        x: 360
-        y: 159
-      deploy_2_vms:
-        x: 77
-        y: 58
-      install_postgres:
-        x: 364
-        y: 28
     results:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:

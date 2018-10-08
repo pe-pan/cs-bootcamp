@@ -1,9 +1,6 @@
 namespace: demo.VMware
 flow:
   name: deploy_2_vms
-  inputs:
-    - username: root
-    - password: admin@123
   workflow:
     - deploy_db_vm:
         do:
@@ -32,18 +29,18 @@ flow:
 extensions:
   graph:
     steps:
+      deploy_db_vm:
+        x: 47
+        y: 77
       deploy_tomcat_vm:
-        x: 189
+        x: 213
         y: 80
         navigate:
           bb3632d8-0f1c-8e68-1cd6-3f46d6b9bfea:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
             port: SUCCESS
-      deploy_db_vm:
-        x: 47
-        y: 77
     results:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:
-          x: 469
-          y: 94
+          x: 377
+          y: 83

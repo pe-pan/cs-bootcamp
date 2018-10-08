@@ -1,9 +1,6 @@
 namespace: demo.VMware
 flow:
   name: deploy_3_vms
-  inputs:
-    - username: root
-    - password: admin@123
   workflow:
     - deploy_vm:
         parallel_loop:
@@ -16,6 +13,7 @@ flow:
           - tomcat_host: '${str(branches_context[0]["ip"])}'
           - account_service_host: '${str(branches_context[1]["ip"])}'
           - db_host: '${str(branches_context[2]["ip"])}'
+          - vm_name_list: '${str([str(x["vm_name"]) for x in branches_context])}'
         navigate:
           - FAILURE: deploy_db_vm
           - SUCCESS: SUCCESS
@@ -56,16 +54,6 @@ flow:
 extensions:
   graph:
     steps:
-      deploy_db_vm:
-        x: 47
-        y: 77
-      deploy_as_vm:
-        x: 329
-        y: 81
-        navigate:
-          59730ba0-dc15-c45d-c546-0b7cd3dcc0f7:
-            targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
-            port: SUCCESS
       deploy_vm:
         x: 93
         y: 232
@@ -73,9 +61,19 @@ extensions:
           4896daf2-c3e5-9e26-b9e2-eca2821bb7bb:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
             port: SUCCESS
+      deploy_db_vm:
+        x: 47
+        y: 77
       deploy_tomcat_vm:
         x: 189
         y: 80
+      deploy_as_vm:
+        x: 329
+        y: 81
+        navigate:
+          59730ba0-dc15-c45d-c546-0b7cd3dcc0f7:
+            targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
+            port: SUCCESS
     results:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:

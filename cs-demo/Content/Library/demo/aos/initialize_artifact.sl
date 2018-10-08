@@ -66,9 +66,9 @@ flow:
             - password: '${password}'
             - filename: '${script_name}'
         navigate:
-          - SUCCESS: is_true
+          - SUCCESS: has_failed
           - FAILURE: on_failure
-    - is_true:
+    - has_failed:
         do:
           io.cloudslang.base.utils.is_true:
             - bool_value: "${str(command_return_code == '0')}"
@@ -81,9 +81,24 @@ flow:
 extensions:
   graph:
     steps:
-      is_true:
-        x: 466
-        y: 462
+      is_artifact_given:
+        x: 257
+        y: 6
+      ssh_command:
+        x: 55
+        y: 310
+      copy_artifact:
+        x: 49
+        y: 160
+      copy_script:
+        x: 418
+        y: 161
+      delete_script:
+        x: 248
+        y: 313
+      has_failed:
+        x: 450
+        y: 302
         navigate:
           a7b67100-7a2a-61eb-082d-35c018efd945:
             targetId: 8f9aa1a2-b5b4-6a09-5bdb-9fb94e9ab2e0
@@ -91,27 +106,12 @@ extensions:
           32d64d81-cd17-48ab-7477-adfe61dd28aa:
             targetId: 4012d319-d667-dea9-65f4-2b24e29f9ae5
             port: 'TRUE'
-      is_artifact_given:
-        x: 257
-        y: 6
-      ssh_command:
-        x: 77
-        y: 340
-      copy_script:
-        x: 556
-        y: 197
-      copy_artifact:
-        x: 56
-        y: 183
-      delete_script:
-        x: 256
-        y: 442
     results:
       FAILURE:
         8f9aa1a2-b5b4-6a09-5bdb-9fb94e9ab2e0:
-          x: 551
-          y: 555
+          x: 555
+          y: 361
       SUCCESS:
         4012d319-d667-dea9-65f4-2b24e29f9ae5:
-          x: 551
-          y: 368
+          x: 548
+          y: 247

@@ -14,7 +14,7 @@ flow:
         publish:
           - filename
         navigate:
-          - SUCCESS: http_client_action
+          - SUCCESS: get_file
     - remote_secure_copy:
         do:
           io.cloudslang.base.remote_file_transfer.remote_secure_copy:
@@ -29,7 +29,7 @@ flow:
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
-    - http_client_action:
+    - get_file:
         do:
           io.cloudslang.base.http.http_client_action:
             - url: '${url}'
@@ -47,21 +47,21 @@ flow:
 extensions:
   graph:
     steps:
-      http_client_action:
-        x: 118
-        y: 267
+      extract_filename:
+        x: 106
+        y: 88
       remote_secure_copy:
-        x: 306
-        y: 266
+        x: 283
+        y: 247
         navigate:
           94ad61f2-64c4-a3a5-1647-6eb06ac1b687:
             targetId: 1a4b4e41-715c-4454-4553-8668c9592a94
             port: SUCCESS
-      extract_filename:
-        x: 106
-        y: 88
+      get_file:
+        x: 100
+        y: 249
     results:
       SUCCESS:
         1a4b4e41-715c-4454-4553-8668c9592a94:
-          x: 298
-          y: 91
+          x: 275
+          y: 95
