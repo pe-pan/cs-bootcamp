@@ -1,4 +1,4 @@
-namespace: demo.aos
+namespace: io.cloudslang.io.cloudslang.demo.aos
 flow:
   name: initialize_artifact
   inputs:
@@ -19,6 +19,30 @@ flow:
         navigate:
           - SUCCESS: copy_script
           - FAILURE: copy_artifact
+    - copy_artifact:
+        do:
+          io.cloudslang.demo.aos.remote_copy:
+            - host: '${host}'
+            - username: '${username}'
+            - password: '${password}'
+            - url: '${artifact_url}'
+        publish:
+          - artifact_name: '${filename}'
+        navigate:
+          - SUCCESS: copy_script
+          - FAILURE: on_failure
+    - copy_script:
+        do:
+          io.cloudslang.demo.aos.remote_copy:
+            - host: '${host}'
+            - username: '${username}'
+            - password: '${password}'
+            - url: '${script_url}'
+        publish:
+          - script_name: '${filename}'
+        navigate:
+          - SUCCESS: ssh_command
+          - FAILURE: on_failure
     - ssh_command:
         do:
           io.cloudslang.base.ssh.ssh_command:
@@ -34,33 +58,9 @@ flow:
         navigate:
           - SUCCESS: delete_script
           - FAILURE: delete_script
-    - copy_artifact:
-        do:
-          demo.aos.remote_copy:
-            - host: '${host}'
-            - username: '${username}'
-            - password: '${password}'
-            - url: '${artifact_url}'
-        publish:
-          - artifact_name: '${filename}'
-        navigate:
-          - SUCCESS: copy_script
-          - FAILURE: on_failure
-    - copy_script:
-        do:
-          demo.aos.remote_copy:
-            - host: '${host}'
-            - username: '${username}'
-            - password: '${password}'
-            - url: '${script_url}'
-        publish:
-          - script_name: '${filename}'
-        navigate:
-          - SUCCESS: ssh_command
-          - FAILURE: on_failure
     - delete_script:
         do:
-          demo.aos.delete_file:
+          io.cloudslang.demo.aos.tools.delete_file:
             - host: '${host}'
             - username: '${username}'
             - password: '${password}'
@@ -84,15 +84,15 @@ extensions:
       is_artifact_given:
         x: 257
         y: 6
-      ssh_command:
-        x: 55
-        y: 310
       copy_artifact:
         x: 49
         y: 160
       copy_script:
         x: 418
         y: 161
+      ssh_command:
+        x: 55
+        y: 310
       delete_script:
         x: 248
         y: 313

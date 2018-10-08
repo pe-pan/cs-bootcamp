@@ -1,4 +1,4 @@
-namespace: demo.aos
+namespace: io.cloudslang.demo.aos
 flow:
   name: remote_copy
   inputs:
@@ -9,12 +9,22 @@ flow:
   workflow:
     - extract_filename:
         do:
-          io.cloudslang.demo.extract_filename:
+          io.cloudslang.demo.aos.tools.extract_filename:
             - url: '${url}'
         publish:
           - filename
         navigate:
           - SUCCESS: get_file
+    - get_file:
+        do:
+          io.cloudslang.base.http.http_client_action:
+            - url: '${url}'
+            - destination_file: '${filename}'
+            - method: GET
+        publish: []
+        navigate:
+          - SUCCESS: remote_secure_copy
+          - FAILURE: on_failure
     - remote_secure_copy:
         do:
           io.cloudslang.base.remote_file_transfer.remote_secure_copy:
@@ -29,16 +39,6 @@ flow:
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
-    - get_file:
-        do:
-          io.cloudslang.base.http.http_client_action:
-            - url: '${url}'
-            - destination_file: '${filename}'
-            - method: GET
-        publish: []
-        navigate:
-          - SUCCESS: remote_secure_copy
-          - FAILURE: on_failure
   outputs:
     - filename: '${filename}'
   results:
@@ -50,6 +50,9 @@ extensions:
       extract_filename:
         x: 106
         y: 88
+      get_file:
+        x: 100
+        y: 249
       remote_secure_copy:
         x: 283
         y: 247
@@ -57,9 +60,6 @@ extensions:
           94ad61f2-64c4-a3a5-1647-6eb06ac1b687:
             targetId: 1a4b4e41-715c-4454-4553-8668c9592a94
             port: SUCCESS
-      get_file:
-        x: 100
-        y: 249
     results:
       SUCCESS:
         1a4b4e41-715c-4454-4553-8668c9592a94:

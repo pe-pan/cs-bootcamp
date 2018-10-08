@@ -1,10 +1,10 @@
-namespace: demo.VMware
+namespace: io.cloudslang.demo.vmware
 flow:
   name: deploy_2_vms
   workflow:
     - deploy_db_vm:
         do:
-          demo.VMware.deploy_vm:
+          io.cloudslang.demo.vmware.deploy_vm:
             - prefix: petr-db-
         publish:
           - db_host: '${ip}'
@@ -13,7 +13,7 @@ flow:
           - SUCCESS: deploy_tomcat_vm
     - deploy_tomcat_vm:
         do:
-          demo.VMware.deploy_vm:
+          io.cloudslang.demo.vmware.deploy_vm:
             - prefix: petr-tm-
         publish:
           - tomcat_host: '${ip}'

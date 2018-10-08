@@ -1,4 +1,4 @@
-namespace: demo.aos
+namespace: io.cloudslang.demo.aos
 flow:
   name: deploy_3_vm_aos
   inputs:
@@ -7,7 +7,7 @@ flow:
   workflow:
     - deploy_3_vms:
         do:
-          demo.VMware.deploy_3_vms: []
+          io.cloudslang.demo.vmware.deploy_3_vms: []
         publish:
           - db_host
           - tomcat_host
@@ -17,7 +17,7 @@ flow:
           - SUCCESS: install_postgres
     - install_java:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
@@ -27,7 +27,7 @@ flow:
           - SUCCESS: install_tomcat
     - install_tomcat:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
@@ -37,7 +37,7 @@ flow:
           - SUCCESS: install_java_as
     - install_java_as:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${account_service_host}'
             - username: '${username}'
             - password: '${password}'
@@ -47,7 +47,7 @@ flow:
           - SUCCESS: install_tomcat_as
     - install_tomcat_as:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${account_service_host}'
             - username: '${username}'
             - password: '${password}'
@@ -57,7 +57,7 @@ flow:
           - SUCCESS: deploy_wars
     - install_postgres:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${db_host}'
             - username: '${username}'
             - password: '${password}'
@@ -67,7 +67,7 @@ flow:
           - SUCCESS: install_java
     - deploy_wars:
         do:
-          demo.aos.deploy_wars:
+          io.cloudslang.demo.aos.deploy_wars:
             - tomcat_host: '${tomcat_host}'
             - account_service_host: '${account_service_host}'
             - db_host: '${db_host}'

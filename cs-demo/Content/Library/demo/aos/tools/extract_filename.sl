@@ -11,7 +11,7 @@
 #!!#
 ########################################################################################################################
 
-namespace: io.cloudslang.demo
+namespace: io.cloudslang.demo.aos.tools
 
 operation:
   name: extract_filename

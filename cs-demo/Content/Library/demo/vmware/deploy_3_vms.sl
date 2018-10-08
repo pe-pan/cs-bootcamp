@@ -1,4 +1,4 @@
-namespace: demo.VMware
+namespace: io.cloudslang.demo.vmware
 flow:
   name: deploy_3_vms
   workflow:
@@ -6,7 +6,7 @@ flow:
         parallel_loop:
           for: "prefix in 'petr-tm-','petr-as-','petr-db-'"
           do:
-            demo.VMware.deploy_vm:
+            io.cloudslang.demo.vmware.deploy_vm:
               - prefix: '${prefix}'
         publish:
           - ip_list: '${str([str(x["ip"]) for x in branches_context])}'
@@ -19,7 +19,7 @@ flow:
           - SUCCESS: SUCCESS
     - deploy_db_vm:
         do:
-          demo.VMware.deploy_vm:
+          io.cloudslang.demo.vmware.deploy_vm:
             - prefix: petr-db-
         publish:
           - db_host: '${ip}'
@@ -28,7 +28,7 @@ flow:
           - SUCCESS: deploy_tomcat_vm
     - deploy_tomcat_vm:
         do:
-          demo.VMware.deploy_vm:
+          io.cloudslang.demo.vmware.deploy_vm:
             - prefix: petr-tm-
         publish:
           - tomcat_host: '${ip}'
@@ -37,7 +37,7 @@ flow:
           - SUCCESS: deploy_as_vm
     - deploy_as_vm:
         do:
-          demo.VMware.deploy_vm:
+          io.cloudslang.demo.vmware.deploy_vm:
             - prefix: petr-as-
         publish:
           - account_service_host: '${ip}'

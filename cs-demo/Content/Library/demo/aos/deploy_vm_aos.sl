@@ -1,4 +1,4 @@
-namespace: demo.aos
+namespace: io.cloudslang.demo.aos
 flow:
   name: deploy_vm_aos
   inputs:
@@ -7,7 +7,7 @@ flow:
   workflow:
     - deploy_vm:
         do:
-          demo.VMware.deploy_vm: []
+          io.cloudslang.demo.vmware.deploy_vm: []
         publish:
           - ip
         navigate:
@@ -15,14 +15,14 @@ flow:
           - SUCCESS: install_aos
     - install_aos:
         do:
-          demo.aos.install_aos:
+          io.cloudslang.demo.aos.install_aos:
             - host: '${ip}'
         navigate:
           - SUCCESS: deploy_wars
           - FAILURE: on_failure
     - deploy_wars:
         do:
-          demo.aos.deploy_wars:
+          io.cloudslang.demo.aos.deploy_wars:
             - tomcat_host: '${ip}'
             - account_service_host: '${ip}'
             - db_host: '${ip}'

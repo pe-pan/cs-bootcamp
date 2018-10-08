@@ -1,4 +1,4 @@
-namespace: demo.aos
+namespace: io.cloudslang.demo.aos
 flow:
   name: deploy_2_vm_aos
   inputs:
@@ -7,7 +7,7 @@ flow:
   workflow:
     - deploy_2_vms:
         do:
-          demo.VMware.deploy_2_vms: []
+          io.cloudslang.demo.vmware.deploy_2_vms: []
         publish:
           - db_host
           - tomcat_host
@@ -16,7 +16,7 @@ flow:
           - SUCCESS: install_postgres
     - install_java:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
@@ -26,7 +26,7 @@ flow:
           - SUCCESS: install_tomcat
     - install_tomcat:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
@@ -36,7 +36,7 @@ flow:
           - SUCCESS: deploy_wars
     - install_postgres:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${db_host}'
             - username: '${username}'
             - password: '${password}'

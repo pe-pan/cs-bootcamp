@@ -1,4 +1,4 @@
-namespace: demo.VMware
+namespace: io.cloudslang.demo.vmware
 flow:
   name: deploy_vm
   inputs:

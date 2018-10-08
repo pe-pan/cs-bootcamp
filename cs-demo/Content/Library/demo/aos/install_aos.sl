@@ -1,4 +1,4 @@
-namespace: demo.aos
+namespace: io.cloudslang.demo.aos
 flow:
   name: install_aos
   inputs:
@@ -8,7 +8,7 @@ flow:
   workflow:
     - install_java:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${host}'
             - username: '${username}'
             - password: '${password}'
@@ -18,7 +18,7 @@ flow:
           - SUCCESS: install_tomcat
     - install_tomcat:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${host}'
             - username: '${username}'
             - password: '${password}'
@@ -28,7 +28,7 @@ flow:
           - SUCCESS: install_postgres
     - install_postgres:
         do:
-          demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.initialize_artifact:
             - host: '${host}'
             - username: '${username}'
             - password: '${password}'
