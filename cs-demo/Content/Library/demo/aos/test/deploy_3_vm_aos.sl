@@ -17,7 +17,7 @@ flow:
           - SUCCESS: install_aos
     - install_aos:
         do:
-          demo.aos.install_aos:
+          io.cloudslang.demo.aos.install_aos:
             - username: '${username}'
             - password: '${password}'
             - tomcat_host: '${tomcat_host}'

@@ -2,15 +2,13 @@ namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: deploy_wars
   inputs:
-    - tomcat_host: 10.0.46.53
+    - tomcat_host
     - account_service_host:
-        default: 10.0.46.52
         required: true
     - db_host:
-        default: 10.0.46.51
         required: true
-    - username: root
-    - password: admin@123
+    - username
+    - password
     - url: 'http://vmdocker.hcm.demo.local:36980/job/AOS/lastSuccessfulBuild/artifact/'
   workflow:
     - deploy_account_service:

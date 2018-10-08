@@ -9,19 +9,21 @@ flow:
         do:
           io.cloudslang.demo.vmware.deploy_vm: []
         publish:
-          - host: '${ip}'
+          - tomcat_host: '${ip}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: install_aos
     - install_aos:
         do:
-          demo.aos.install_aos:
+          io.cloudslang.demo.aos.install_aos:
             - username: '${username}'
             - password: '${password}'
-            - tomcat_host: '${host}'
+            - tomcat_host: '${tomcat_host}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
+  outputs:
+    - tomcat_host: '${tomcat_host}'
   results:
     - FAILURE
     - SUCCESS
