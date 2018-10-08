@@ -22,8 +22,22 @@ flow:
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
             - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
+          - FAILURE: deploy_catalog
+          - SUCCESS: deploy_tm_wars
+    - deploy_tm_wars:
+        loop:
+          for: "war in 'catalog','MasterCredit','order','ROOT','ShipEx','SafePay'"
+          do:
+            demo.aos.initialize_artifact:
+              - host: '${tomcat_host}'
+              - username: '${username}'
+              - password: '${password}'
+              - artifact_url: "${url+war+'/target/'+war'.war'}"
+              - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
+              - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
+        navigate:
           - FAILURE: on_failure
-          - SUCCESS: deploy_catalog
+          - SUCCESS: SUCCESS
     - deploy_catalog:
         do:
           demo.aos.initialize_artifact:
