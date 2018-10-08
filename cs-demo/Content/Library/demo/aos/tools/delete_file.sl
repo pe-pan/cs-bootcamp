@@ -2,10 +2,10 @@ namespace: io.cloudslang.demo.aos.tools
 flow:
   name: delete_file
   inputs:
-    - host:
-    - username:
-    - password:
-    - filename:
+    - host
+    - username
+    - password
+    - filename
   workflow:
     - delete_file:
         do:

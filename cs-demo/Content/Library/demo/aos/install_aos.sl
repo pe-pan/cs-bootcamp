@@ -2,9 +2,9 @@ namespace: io.cloudslang.demo.aos
 flow:
   name: install_aos
   inputs:
-    - username:
-    - password:
-    - tomcat_host:
+    - username
+    - password
+    - tomcat_host
     - account_service_host:
         required: false
     - db_host:

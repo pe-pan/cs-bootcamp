@@ -2,10 +2,10 @@ namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: remote_copy
   inputs:
-    - host:
-    - username:
-    - password:
-    - url:
+    - host
+    - username
+    - password
+    - url
   workflow:
     - extract_filename:
         do:
