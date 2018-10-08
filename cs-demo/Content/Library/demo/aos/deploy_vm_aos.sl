@@ -41,11 +41,11 @@ extensions:
         x: 94
         y: 77
       install_aos:
-        x: 243
-        y: 76
+        x: 332
+        y: 89
       deploy_wars:
-        x: 382
-        y: 85
+        x: 550
+        y: 99
         navigate:
           85994bc5-c076-1c46-c287-3342a88e6bff:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
