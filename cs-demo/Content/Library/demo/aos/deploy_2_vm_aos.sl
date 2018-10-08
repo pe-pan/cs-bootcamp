@@ -46,7 +46,7 @@ flow:
           - SUCCESS: install_java
     - deploy_wars:
         do:
-          demo.aos.deploy_wars:
+          io.cloudslang.demo.aos.deploy_wars:
             - tomcat_host: '${tomcat_host}'
             - account_service_host: '${tomcat_host}'
             - db_host: '${db_host}'
