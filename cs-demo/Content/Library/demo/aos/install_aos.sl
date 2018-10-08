@@ -1,15 +1,29 @@
-namespace: io.cloudslang.demo.aos
+namespace: demo.aos
 flow:
   name: install_aos
   inputs:
-    - host: 10.0.46.54
     - username: root
     - password: admin@123
+    - tomcat_host: 10.0.46.29
+    - account_service_host:
+        required: false
+    - db_host:
+        required: false
   workflow:
+    - install_postgres:
+        do:
+          io.cloudslang.demo.aos.initialize_artifact:
+            - host: "${get('db_host', tomcat_host)}"
+            - username: '${username}'
+            - password: '${password}'
+            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_postgres.sh'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: install_java
     - install_java:
         do:
           io.cloudslang.demo.aos.initialize_artifact:
-            - host: '${host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_java.sh'
@@ -19,44 +33,84 @@ flow:
     - install_tomcat:
         do:
           io.cloudslang.demo.aos.initialize_artifact:
-            - host: '${host}'
+            - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
             - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
         navigate:
           - FAILURE: on_failure
-          - SUCCESS: install_postgres
-    - install_postgres:
+          - SUCCESS: as_host_given
+    - install_java_as:
         do:
           io.cloudslang.demo.aos.initialize_artifact:
-            - host: '${host}'
+            - host: '${account_service_host}'
             - username: '${username}'
             - password: '${password}'
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_postgres.sh'
+            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_java.sh'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: install_tomcat_as
+    - install_tomcat_as:
+        do:
+          io.cloudslang.demo.aos.initialize_artifact:
+            - host: '${account_service_host}'
+            - username: '${username}'
+            - password: '${password}'
+            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: deploy_wars
+    - deploy_wars:
+        do:
+          io.cloudslang.demo.aos.deploy_wars:
+            - tomcat_host: '${tomcat_host}'
+            - account_service_host: "${get('acccount_service_host',tomcat_host)}"
+            - db_host: "${get('db_host', tomcat_host)}"
+            - username: '${username}'
+            - password: '${password}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
+    - as_host_given:
+        do:
+          io.cloudslang.base.utils.is_true:
+            - bool_value: "${str(get('account_service_host', tomcat_host) != tomcat_host)}"
+        navigate:
+          - 'TRUE': install_java_as
+          - 'FALSE': deploy_wars
   results:
-    - SUCCESS
     - FAILURE
+    - SUCCESS
 extensions:
   graph:
     steps:
-      install_java:
-        x: 150
-        y: 82
-      install_tomcat:
-        x: 299
-        y: 109
       install_postgres:
-        x: 469
-        y: 146
+        x: 35
+        y: 75
+      install_java:
+        x: 191
+        y: 77
+      install_tomcat:
+        x: 374
+        y: 78
+      install_java_as:
+        x: 42
+        y: 342
+      install_tomcat_as:
+        x: 189
+        y: 351
+      deploy_wars:
+        x: 393
+        y: 354
         navigate:
-          6c873fc9-f3c1-5439-f8dd-d931a59f7e1d:
-            targetId: 768a3e24-15d0-1251-db01-f43d031a74f4
+          8d48cf49-b8e3-8b3d-2054-a44f2582efc2:
+            targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
             port: SUCCESS
+      as_host_given:
+        x: 237
+        y: 212
     results:
       SUCCESS:
-        768a3e24-15d0-1251-db01-f43d031a74f4:
-          x: 472
-          y: 413
+        cea6732a-877d-dc69-d2f7-f7c6ee42ac23:
+          x: 391
+          y: 219
