@@ -9,14 +9,37 @@ flow:
         do:
           io.cloudslang.demo.vmware.deploy_vm: []
         publish:
-          - ip
+          - host: '${ip}'
         navigate:
           - FAILURE: on_failure
-          - SUCCESS: install_aos
-    - install_aos:
+          - SUCCESS: install_java
+    - install_java:
         do:
-          io.cloudslang.demo.aos.install_aos:
-            - host: '${ip}'
+          io.cloudslang.demo.aos.initialize_artifact:
+            - host: '${host}'
+            - username: '${username}'
+            - password: '${password}'
+            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_java.sh'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: install_tomcat
+    - install_tomcat:
+        do:
+          io.cloudslang.demo.aos.initialize_artifact:
+            - host: '${host}'
+            - username: '${username}'
+            - password: '${password}'
+            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: install_postgres
+    - install_postgres:
+        do:
+          io.cloudslang.demo.aos.initialize_artifact:
+            - host: '${host}'
+            - username: '${username}'
+            - password: '${password}'
+            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_postgres.sh'
         navigate:
           - SUCCESS: deploy_wars
           - FAILURE: on_failure
