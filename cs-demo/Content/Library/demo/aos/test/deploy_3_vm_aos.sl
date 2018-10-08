@@ -1,15 +1,17 @@
-namespace: io.cloudslang.demo.aos
+namespace: io.cloudslang.demo.aos.test
 flow:
-  name: deploy_vm_aos
+  name: deploy_3_vm_aos
   inputs:
     - username: root
     - password: admin@123
   workflow:
-    - deploy_vm:
+    - deploy_3_vms:
         do:
-          io.cloudslang.demo.vmware.deploy_vm: []
+          io.cloudslang.demo.vmware.deploy_3_vms: []
         publish:
-          - host: '${ip}'
+          - db_host
+          - tomcat_host
+          - account_service_host
         navigate:
           - FAILURE: on_failure
           - SUCCESS: install_aos
@@ -18,28 +20,34 @@ flow:
           demo.aos.install_aos:
             - username: '${username}'
             - password: '${password}'
-            - tomcat_host: '${host}'
+            - tomcat_host: '${tomcat_host}'
+            - account_service_host: '${account_service_host}'
+            - db_host: '${db_host}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
+  outputs:
+    - tomcat_host: '${tomcat_host}'
+    - account_service_host: '${account_service_host}'
+    - db_host: '${db_host}'
   results:
     - FAILURE
     - SUCCESS
 extensions:
   graph:
     steps:
-      deploy_vm:
-        x: 60
-        y: 58
+      deploy_3_vms:
+        x: 131
+        y: 30
       install_aos:
-        x: 224
-        y: 53
+        x: 263
+        y: 35
         navigate:
-          de99d59a-bc93-9e55-7f52-7015665f5762:
+          96253e70-39e7-986f-0c32-b02684404543:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
             port: SUCCESS
     results:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:
-          x: 369
-          y: 66
+          x: 427
+          y: 44

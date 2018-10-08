@@ -1,4 +1,4 @@
-namespace: io.cloudslang.demo.aos
+namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: deploy_wars
   inputs:
@@ -15,7 +15,7 @@ flow:
   workflow:
     - deploy_account_service:
         do:
-          io.cloudslang.demo.aos.initialize_artifact:
+          io.cloudslang.demo.aos.sub_flows.initialize_artifact:
             - host: '${account_service_host}'
             - username: '${username}'
             - password: '${password}'
@@ -29,7 +29,7 @@ flow:
         loop:
           for: "war in 'catalog','MasterCredit','order','ROOT','ShipEx','SafePay'"
           do:
-            io.cloudslang.demo.aos.initialize_artifact:
+            io.cloudslang.demo.aos.sub_flows.initialize_artifact:
               - host: '${tomcat_host}'
               - username: '${username}'
               - password: '${password}'

@@ -1,4 +1,4 @@
-namespace: io.cloudslang.demo.aos
+namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: remote_copy
   inputs:

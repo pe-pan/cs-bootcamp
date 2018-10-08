@@ -1,4 +1,4 @@
-namespace: io.cloudslang.demo.aos
+namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: initialize_artifact
   inputs:
@@ -21,7 +21,7 @@ flow:
           - FAILURE: copy_artifact
     - copy_artifact:
         do:
-          io.cloudslang.demo.aos.remote_copy:
+          io.cloudslang.demo.aos.sub_flows.remote_copy:
             - host: '${host}'
             - username: '${username}'
             - password: '${password}'
@@ -33,7 +33,7 @@ flow:
           - FAILURE: on_failure
     - copy_script:
         do:
-          io.cloudslang.demo.aos.remote_copy:
+          io.cloudslang.demo.aos.sub_flows.remote_copy:
             - host: '${host}'
             - username: '${username}'
             - password: '${password}'

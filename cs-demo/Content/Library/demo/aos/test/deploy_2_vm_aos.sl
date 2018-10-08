@@ -1,4 +1,4 @@
-namespace: io.cloudslang.demo.aos
+namespace: io.cloudslang.demo.aos.test
 flow:
   name: deploy_2_vm_aos
   inputs:
