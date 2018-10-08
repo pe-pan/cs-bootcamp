@@ -2,10 +2,10 @@ namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: remote_copy
   inputs:
-    - host: 10.0.46.20
-    - username: root
-    - password: admin@123
-    - url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
+    - host
+    - username
+    - password
+    - url
   workflow:
     - extract_filename:
         do:

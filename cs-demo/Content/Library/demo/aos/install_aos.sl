@@ -2,9 +2,9 @@ namespace: io.cloudslang.demo.aos
 flow:
   name: install_aos
   inputs:
-    - username: root
-    - password: admin@123
-    - tomcat_host: 10.0.46.29
+    - username: "${get_sp('vm_username')}"
+    - password: "${get_sp('vm_password')}"
+    - tomcat_host
     - account_service_host:
         required: false
     - db_host:
