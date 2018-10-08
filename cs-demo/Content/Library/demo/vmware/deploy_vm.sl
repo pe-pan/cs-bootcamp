@@ -2,12 +2,12 @@ namespace: io.cloudslang.demo.vmware
 flow:
   name: deploy_vm
   inputs:
-    - host: 10.0.46.10
-    - user: "capa1\\1010-capa1user"
-    - password: Automation123
-    - image: Ubuntu
-    - datacenter: CAPA1 Datacenter
-    - folder: AOS
+    - host: "${get_sp('vcenter_host')}"
+    - user: "${get_sp('vcenter_user')}"
+    - password: "${get_sp('vcenter_password')}"
+    - image: "${get_sp('vcenter_image')}"
+    - datacenter: "${get_sp('vcenter_datacenter')}"
+    - folder: "${get_sp('vcenter_datacenter')}"
     - prefix: petr-
   workflow:
     - unique_vm_name_generator:
