@@ -2,12 +2,12 @@ namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: initialize_artifact
   inputs:
-    - host: 10.0.46.51
-    - username: root
-    - password: admin@123
+    - host:
+    - username:
+    - password:
     - artifact_url:
         required: false
-    - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
+    - script_url:
     - parameters:
         required: false
   workflow:

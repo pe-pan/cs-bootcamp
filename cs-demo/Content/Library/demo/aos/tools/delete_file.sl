@@ -2,10 +2,10 @@ namespace: io.cloudslang.demo.aos.tools
 flow:
   name: delete_file
   inputs:
-    - host: 10.0.46.20
-    - username: root
-    - password: admin@123
-    - filename: install_tomcat.sh
+    - host:
+    - username:
+    - password:
+    - filename:
   workflow:
     - delete_file:
         do:
