@@ -15,33 +15,6 @@ flow:
           - db_host: '${str(branches_context[2]["ip"])}'
           - vm_name_list: '${str([str(x["vm_name"]) for x in branches_context])}'
         navigate:
-          - FAILURE: deploy_db_vm
-          - SUCCESS: SUCCESS
-    - deploy_db_vm:
-        do:
-          io.cloudslang.demo.vmware.deploy_vm:
-            - prefix: petr-db-
-        publish:
-          - db_host: '${ip}'
-        navigate:
-          - FAILURE: on_failure
-          - SUCCESS: deploy_tomcat_vm
-    - deploy_tomcat_vm:
-        do:
-          io.cloudslang.demo.vmware.deploy_vm:
-            - prefix: petr-tm-
-        publish:
-          - tomcat_host: '${ip}'
-        navigate:
-          - FAILURE: on_failure
-          - SUCCESS: deploy_as_vm
-    - deploy_as_vm:
-        do:
-          io.cloudslang.demo.vmware.deploy_vm:
-            - prefix: petr-as-
-        publish:
-          - account_service_host: '${ip}'
-        navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
   outputs:
@@ -55,27 +28,14 @@ extensions:
   graph:
     steps:
       deploy_vm:
-        x: 93
-        y: 232
+        x: 82
+        y: 96
         navigate:
           4896daf2-c3e5-9e26-b9e2-eca2821bb7bb:
-            targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
-            port: SUCCESS
-      deploy_db_vm:
-        x: 47
-        y: 77
-      deploy_tomcat_vm:
-        x: 189
-        y: 80
-      deploy_as_vm:
-        x: 329
-        y: 81
-        navigate:
-          59730ba0-dc15-c45d-c546-0b7cd3dcc0f7:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
             port: SUCCESS
     results:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:
-          x: 469
-          y: 94
+          x: 284
+          y: 100
