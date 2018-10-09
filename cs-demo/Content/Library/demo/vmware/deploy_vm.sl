@@ -7,7 +7,7 @@ flow:
     - password: "${get_sp('vcenter_password')}"
     - image: "${get_sp('vcenter_image')}"
     - datacenter: "${get_sp('vcenter_datacenter')}"
-    - folder: "${get_sp('vcenter_datacenter')}"
+    - folder: "${get_sp('vcenter_folder')}"
     - prefix: petr-
   workflow:
     - unique_vm_name_generator:
