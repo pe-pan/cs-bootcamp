@@ -2,8 +2,8 @@ namespace: io.cloudslang.demo.aos.test
 flow:
   name: deploy_3_vm_aos
   inputs:
-    - username: root
-    - password: admin@123
+    - username: "${get_sp('vm_username')}"
+    - password: "${get_sp('vm_password')}"
   workflow:
     - deploy_3_vms:
         do:
