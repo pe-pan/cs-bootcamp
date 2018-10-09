@@ -9,7 +9,7 @@ flow:
         required: true
     - username
     - password
-    - url: 'http://vmdocker.hcm.demo.local:36980/job/AOS/lastSuccessfulBuild/artifact/'
+    - url: "${get_sp('war_repo_root_url')}"
   workflow:
     - deploy_account_service:
         do:
@@ -18,7 +18,7 @@ flow:
             - username: '${username}'
             - password: '${password}'
             - artifact_url: "${url+'accountservice/target/accountservice.war'}"
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
+            - script_url: "${get_sp('script_deploy_war')}"
             - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure
@@ -32,7 +32,7 @@ flow:
               - username: '${username}'
               - password: '${password}'
               - artifact_url: "${url+war.lower()+'/target/'+war+'.war'}"
-              - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
+              - script_url: "${get_sp('script_deploy_war')}"
               - parameters: "${db_host+' postgres admin '+tomcat_host+' '+account_service_host}"
         navigate:
           - FAILURE: on_failure

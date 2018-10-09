@@ -16,7 +16,7 @@ flow:
             - host: "${get('db_host', tomcat_host)}"
             - username: '${username}'
             - password: '${password}'
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_postgres.sh'
+            - script_url: "${get_sp('script_install_postgres')}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: install_java
@@ -26,7 +26,7 @@ flow:
             - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_java.sh'
+            - script_url: "${get_sp('script_install_java')}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: install_tomcat
@@ -36,7 +36,7 @@ flow:
             - host: '${tomcat_host}'
             - username: '${username}'
             - password: '${password}'
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
+            - script_url: "${get_sp('script_install_tomcat')}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: as_host_given
@@ -53,7 +53,7 @@ flow:
             - host: '${account_service_host}'
             - username: '${username}'
             - password: '${password}'
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_java.sh'
+            - script_url: "${get_sp('script_install_java')}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: install_tomcat_as
@@ -63,7 +63,7 @@ flow:
             - host: '${account_service_host}'
             - username: '${username}'
             - password: '${password}'
-            - script_url: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_tomcat.sh'
+            - script_url: "${get_sp('script_install_tomcat')}"
         navigate:
           - FAILURE: on_failure
           - SUCCESS: deploy_wars
