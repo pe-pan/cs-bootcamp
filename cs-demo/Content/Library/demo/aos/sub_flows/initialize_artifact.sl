@@ -2,12 +2,12 @@ namespace: io.cloudslang.demo.aos.sub_flows
 flow:
   name: initialize_artifact
   inputs:
-    - host:
-    - username:
-    - password:
+    - host
+    - username
+    - password
     - artifact_url:
         required: false
-    - script_url:
+    - script_url
     - parameters:
         required: false
   workflow:
