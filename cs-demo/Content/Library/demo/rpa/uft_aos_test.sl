@@ -1,10 +1,10 @@
-namespace: demo.rpa
+namespace: io.cloudslang.demo.rpa
 flow:
-  name: rpa_uft_test
+  name: uft_aos_test
   inputs:
-    - aos_host: 10.0.46.50
-    - aos_user: pepan
-    - aos_password: Cloud_123
+    - aos_host
+    - aos_user
+    - aos_password
     - catalog: TABLETS
     - item: HP ElitePad 1000 G2 Tablet
   workflow:
