@@ -2,11 +2,16 @@ namespace: io.cloudslang.demo.rpa
 flow:
   name: uft_aos_test
   inputs:
-    - aos_host
-    - aos_user
-    - aos_password
+    - aos_host: 10.0.46.29
+    - aos_user: pepan
+    - aos_password:
+        default: Cloud_123
+        sensitive: true
     - catalog: TABLETS
     - item: HP ElitePad 1000 G2 Tablet
+    - uft_test_location:
+        default: "C:\\Users\\Administrator\\Documents\\Unified Functional Testing\\AOS\\AOS"
+        required: true
   workflow:
     - run_test:
         do:
@@ -19,7 +24,7 @@ flow:
             - port: '5985'
             - protocol: http
             - is_test_visible: 'true'
-            - test_path: "C:\\Users\\Administrator\\Documents\\Unified Functional Testing\\AOS"
+            - test_path: '${uft_test_location}'
             - test_results_path: "${get_sp('uft_result_location')}"
             - uft_workspace_path: "${get_sp('uft_result_location')}"
             - test_parameters: "${'host:'+aos_host+',user:'+aos_user+',password:'+aos_password+',catalog:'+catalog+',item:'+item}"

@@ -5,5 +5,4 @@ properties:
   - uft_password:
       value: Solutions@2016
       sensitive: true
-  - uft_test_location: "C:\\Users\\Administrator\\Documents\\Unified Functional Testing\\AOS"
   - uft_result_location: "c:\\temp"
