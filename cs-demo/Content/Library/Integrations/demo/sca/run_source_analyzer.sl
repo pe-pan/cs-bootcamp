@@ -19,7 +19,7 @@ flow:
         default: "${get_sp('sca_scan_result')}"
         required: false
   workflow:
-    - ssh_flow:
+    - analyze_source_code:
         do:
           io.cloudslang.base.ssh.ssh_flow:
             - host: "${get('host', get_sp('sca_host'))}"
@@ -33,16 +33,16 @@ flow:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
   outputs:
-    - score: '${score}'
+    - scan_result_file: '${scan_result}'
   results:
     - FAILURE
     - SUCCESS
 extensions:
   graph:
     steps:
-      ssh_flow:
-        x: 215
-        y: 224
+      analyze_source_code:
+        x: 70
+        y: 79
         navigate:
           6e935757-1dd6-299c-ca4f-0bf225efcb52:
             targetId: 040e6b9e-6901-69d4-885d-82f4da1d1529
@@ -50,5 +50,5 @@ extensions:
     results:
       SUCCESS:
         040e6b9e-6901-69d4-885d-82f4da1d1529:
-          x: 399
-          y: 225
+          x: 238
+          y: 82

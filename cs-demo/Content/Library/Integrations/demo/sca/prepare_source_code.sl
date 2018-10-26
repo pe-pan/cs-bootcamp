@@ -27,7 +27,7 @@ flow:
                 sensitive: true
             - scan_input: "${get_sp('sca_scan_input')}"
         publish:
-          - scan_input
+          - scan_input: "${get_sp('sca_scan_input')}"
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
@@ -40,8 +40,8 @@ extensions:
   graph:
     steps:
       copy_folder_to_scan:
-        x: 245
-        y: 206
+        x: 76
+        y: 73
         navigate:
           d4d9b022-1d97-6825-464b-a46f2f76af49:
             targetId: 7fac5ab9-0baa-5d5a-a09d-568cd529f387
@@ -49,5 +49,5 @@ extensions:
     results:
       SUCCESS:
         7fac5ab9-0baa-5d5a-a09d-568cd529f387:
-          x: 381
-          y: 208
+          x: 244
+          y: 80
