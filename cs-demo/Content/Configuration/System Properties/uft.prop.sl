@@ -8,4 +8,4 @@ properties:
   - uft_result_location: "c:\\temp"
   - uft_protocol: http
   - uft_port: 5985
-  - uft_is_test_visible: true
+  - uft_is_test_visible: 'true'
