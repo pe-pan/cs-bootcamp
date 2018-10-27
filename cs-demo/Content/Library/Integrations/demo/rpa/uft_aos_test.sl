@@ -2,7 +2,7 @@ namespace: io.cloudslang.demo.rpa
 flow:
   name: uft_aos_test
   inputs:
-    - aos_host: 10.0.46.29
+    - aos_host: 10.0.46.58
     - aos_user: pepan
     - aos_password:
         default: Cloud_123
@@ -28,6 +28,11 @@ flow:
             - test_results_path: "${get_sp('uft_result_location')}"
             - uft_workspace_path: "${get_sp('uft_result_location')}"
             - test_parameters: "${'host:'+aos_host+',user:'+aos_user+',password:'+aos_password+',catalog:'+catalog+',item:'+item}"
+        publish:
+          - return_result
+          - return_code
+          - script_exit_code
+          - script_name
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
