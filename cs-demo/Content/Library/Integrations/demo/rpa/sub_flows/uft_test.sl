@@ -21,13 +21,16 @@ flow:
             - uft_workspace_path: "${get_sp('uft_result_location')}"
             - test_parameters
         publish:
-          - return_result
           - return_code
           - script_exit_code
-          - script_name
+          - test_return_result
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
+  outputs:
+    - test_return_result: '${test_return_result}'
+    - script_exit_code: '${script_exit_code}'
+    - return_code: '${return_code}'
   results:
     - FAILURE
     - SUCCESS

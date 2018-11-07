@@ -18,13 +18,16 @@ flow:
             - test_path
             - test_parameters: "${'host:'+aos_host+',user:'+aos_user+',password:'+aos_password+',catalog:'+catalog+',item:'+item}"
         publish:
-          - return_result
           - return_code
           - script_exit_code
-          - script_name
+          - test_return_result
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
+  outputs:
+    - test_return_result: '${test_return_result}'
+    - script_exit_code: '${script_exit_code}'
+    - return_code: '${return_code}'
   results:
     - FAILURE
     - SUCCESS
