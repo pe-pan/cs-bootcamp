@@ -1,17 +1,17 @@
 namespace: ''
 properties:
   - script_location: /tmp
-  - vcenter_host: 10.0.46.10
-  - vcenter_user: "capa1\\1010-capa1user"
+  - vcenter_host: 10.3.61.10
+  - vcenter_user: hcm
   - vcenter_password:
-      value: Automation123
+      value: Police123
       sensitive: true
-  - vcenter_image: Ubuntu
-  - vcenter_datacenter: Capa1 Datacenter
-  - vcenter_folder: Students
+  - vcenter_image: RHEL7_linked
+  - vcenter_datacenter: HIT_Provisioning
+  - vcenter_folder: AOS
   - vm_username: root
   - vm_password:
-      value: admin@123
+      value: linux1
       sensitive: true
   - script_deploy_war: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/deploy_war.sh'
   - script_install_java: 'http://vmdocker.hcm.demo.local:36980/job/AOS-repo/ws/install_java.sh'
