@@ -16,8 +16,7 @@ flow:
           io.cloudslang.base.strings.string_equals:
             - first_string: '${artifact_url}'
             - second_string: ''
-        publish:
-          - retries: '5'
+        publish: []
         navigate:
           - SUCCESS: copy_script
           - FAILURE: copy_artifact
@@ -55,7 +54,6 @@ flow:
                 value: '${password}'
                 sensitive: true
             - timeout: '300000'
-            - use_shell: null
         publish:
           - command_return_code
         navigate:
