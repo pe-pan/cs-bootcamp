@@ -78,6 +78,8 @@ flow:
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
+  outputs:
+    - url: '${"http://"+tomcat_host+":8080"}'
   results:
     - FAILURE
     - SUCCESS
@@ -86,25 +88,25 @@ extensions:
     steps:
       install_postgres:
         x: 35
-        y: 75
+        'y': 75
       install_java:
         x: 191
-        y: 77
+        'y': 77
       install_tomcat:
         x: 374
-        y: 78
+        'y': 78
       as_host_given:
         x: 237
-        y: 212
+        'y': 212
       install_java_as:
         x: 42
-        y: 342
+        'y': 342
       install_tomcat_as:
         x: 189
-        y: 351
+        'y': 351
       deploy_wars:
         x: 393
-        y: 354
+        'y': 354
         navigate:
           8d48cf49-b8e3-8b3d-2054-a44f2582efc2:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
@@ -113,4 +115,4 @@ extensions:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:
           x: 391
-          y: 219
+          'y': 219
