@@ -78,8 +78,6 @@ flow:
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
-  outputs:
-    - url: '${"http://"+tomcat_host+":8080"}'
   results:
     - FAILURE
     - SUCCESS
