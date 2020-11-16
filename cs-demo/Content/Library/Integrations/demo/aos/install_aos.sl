@@ -2,9 +2,16 @@ namespace: io.cloudslang.demo.aos
 flow:
   name: install_aos
   inputs:
-    - username: "${get_sp('vm_username')}"
-    - password: "${get_sp('vm_password')}"
-    - tomcat_host
+    - username:
+        prompt:
+          type: text
+    - password:
+        prompt:
+          type: text
+        sensitive: true
+    - tomcat_host:
+        prompt:
+          type: text
     - account_service_host:
         required: false
     - db_host:
@@ -94,11 +101,11 @@ extensions:
         x: 374
         'y': 78
       as_host_given:
-        x: 237
-        'y': 212
+        x: 198
+        'y': 213
       install_java_as:
         x: 42
-        'y': 342
+        'y': 355
       install_tomcat_as:
         x: 189
         'y': 351

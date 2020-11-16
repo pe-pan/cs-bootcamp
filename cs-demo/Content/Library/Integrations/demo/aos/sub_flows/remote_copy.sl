@@ -19,6 +19,7 @@ flow:
         do:
           io.cloudslang.base.http.http_client_action:
             - url: '${url}'
+            - auth_type: anonymous
             - destination_file: '${filename}'
             - method: GET
         publish: []
@@ -49,13 +50,13 @@ extensions:
     steps:
       extract_filename:
         x: 106
-        y: 88
+        'y': 88
       get_file:
         x: 100
-        y: 249
+        'y': 249
       remote_secure_copy:
         x: 283
-        y: 247
+        'y': 247
         navigate:
           94ad61f2-64c4-a3a5-1647-6eb06ac1b687:
             targetId: 1a4b4e41-715c-4454-4553-8668c9592a94
@@ -64,4 +65,4 @@ extensions:
       SUCCESS:
         1a4b4e41-715c-4454-4553-8668c9592a94:
           x: 275
-          y: 95
+          'y': 95
