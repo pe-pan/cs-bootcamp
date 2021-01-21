@@ -9,13 +9,13 @@ properties:
   - vcenter_image: linux-template
   - vcenter_datacenter: CAPA1 Datacenter
   - vcenter_folder: AOS
-  - vm_username: root
+  - vm_username: ''
   - vm_password:
-      value: Cloud_1234
+      value: ''
       sensitive: false
-  - script_deploy_war: 'http://jenkins.hcmx.local:8080/job/AOS-repo/ws/deploy_war.sh'
+  - script_deploy_war: 'http://httpserver.dca.swdemos.net:6500/aos/scripts/deploy_war.sh'
   - script_install_java: 'http://jenkins.hcmx.local:8080/job/AOS-repo/ws/install_java.sh'
   - script_install_postgres: 'http://jenkins.hcmx.local:8080/job/AOS-repo/ws/install_postgres.sh'
   - script_install_tomcat: 'http://jenkins.hcmx.local:8080/job/AOS-repo/ws/install_tomcat.sh'
-  - war_repo_root_url: 'http://jenkins.hcmx.local:8080/job/AOS-repo/lastSuccessfulBuild/artifact/'
+  - war_repo_root_url: 'http://httpserver.dca.swdemos.net:6500/aos/artifact/'
   - script_retries: '5'
