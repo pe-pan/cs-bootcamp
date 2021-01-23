@@ -2,18 +2,10 @@ namespace: Integrations.demo.aos.application
 flow:
   name: install_aos_application
   inputs:
-    - username:
-        prompt:
-          type: text
-        default: root
+    - username
     - password:
-        prompt:
-          type: text
-        default: Cloud_1234
-        sensitive: true
-    - tomcat_host:
-        prompt:
-          type: text
+        sensitive: false
+    - tomcat_host
     - account_service_host:
         required: false
     - db_host:
