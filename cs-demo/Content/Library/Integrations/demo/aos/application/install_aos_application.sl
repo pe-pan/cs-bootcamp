@@ -2,13 +2,21 @@ namespace: Integrations.demo.aos.application
 flow:
   name: install_aos_application
   inputs:
-    - username
+    - username: petr
     - password:
+        default: Cloud_123Cloud_123
         sensitive: false
-    - tomcat_host
+    - tomcat_host: 51.143.88.232
     - account_service_host:
         required: false
+    - db_username:
+        default: petr
+        required: false
+    - db_password:
+        default: Cloud_123Cloud_123
+        required: false
     - db_host:
+        default: hybriddb2f4808d.c4nvcbxp4icc.ap-southeast-1.rds.amazonaws.com
         required: false
   workflow:
     - deploy_aos_wars:
@@ -19,6 +27,8 @@ flow:
             - db_host: "${get('db_host', tomcat_host)}"
             - username: '${username}'
             - password: '${password}'
+            - db_username: '${db_username}'
+            - db_password: '${db_password}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
