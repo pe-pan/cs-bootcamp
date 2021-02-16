@@ -37,7 +37,6 @@ flow:
                 value: '${password}'
                 sensitive: true
             - known_hosts_policy: null
-            - timeout: '300000'
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure

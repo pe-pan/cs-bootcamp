@@ -2,23 +2,32 @@ namespace: Integrations.demo.aos.application
 flow:
   name: install_aos_application
   inputs:
-    - username: petr
+    - username
     - password:
-        default: Cloud_123Cloud_123
-        sensitive: false
-    - tomcat_host: 51.143.88.232
+        sensitive: true
+    - tomcat_host
     - account_service_host:
         required: false
     - db_username:
-        default: petr
         required: false
     - db_password:
-        default: Cloud_123Cloud_123
         required: false
+        sensitive: true
     - db_host:
-        default: hybriddb2f4808d.c4nvcbxp4icc.ap-southeast-1.rds.amazonaws.com
         required: false
+    - db_port: '5432'
+    - deploy_admin: 'true'
   workflow:
+    - create_aos_schema:
+        do:
+          Integrations.demo.aos.software.create_aos_schema:
+            - db_host: '${db_host}'
+            - db_port: '${db_port}'
+            - db_username: '${db_username}'
+            - db_password: '${db_password}'
+        navigate:
+          - FAILURE: deploy_aos_wars
+          - SUCCESS: deploy_aos_wars
     - deploy_aos_wars:
         do:
           io.cloudslang.demo.aos.sub_flows.deploy_wars:
@@ -29,6 +38,7 @@ flow:
             - password: '${password}'
             - db_username: '${db_username}'
             - db_password: '${db_password}'
+            - deploy_admin: '${deploy_admin}'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
@@ -38,9 +48,12 @@ flow:
 extensions:
   graph:
     steps:
+      create_aos_schema:
+        x: 71
+        'y': 191.34375
       deploy_aos_wars:
-        x: 192
-        'y': 210
+        x: 233
+        'y': 199
         navigate:
           8d48cf49-b8e3-8b3d-2054-a44f2582efc2:
             targetId: cea6732a-877d-dc69-d2f7-f7c6ee42ac23
@@ -48,5 +61,5 @@ extensions:
     results:
       SUCCESS:
         cea6732a-877d-dc69-d2f7-f7c6ee42ac23:
-          x: 391
-          'y': 219
+          x: 393
+          'y': 198

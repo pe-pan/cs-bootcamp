@@ -2,16 +2,10 @@ namespace: io.cloudslang.demo.aos
 flow:
   name: install_aos
   inputs:
-    - username:
-        prompt:
-          type: text
+    - username
     - password:
-        prompt:
-          type: text
         sensitive: true
-    - tomcat_host:
-        prompt:
-          type: text
+    - tomcat_host
     - account_service_host:
         required: false
     - db_host:
@@ -82,6 +76,9 @@ flow:
             - db_host: "${get('db_host', tomcat_host)}"
             - username: '${username}'
             - password: '${password}'
+            - db_username: postgres
+            - db_password: admin
+            - deploy_admin: 'false'
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS

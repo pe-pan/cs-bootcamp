@@ -19,3 +19,4 @@ properties:
   - script_install_tomcat: 'http://jenkins.hcmx.local:8080/job/AOS-repo/ws/install_tomcat.sh'
   - war_repo_root_url: 'http://httpserver.dca.swdemos.net:6500/aos/artifact/'
   - script_retries: '5'
+  - script_downgrade_java: 'http://httpserver.dca.swdemos.net:6500/aos/scripts/downgrade_java_to_8.sh'
