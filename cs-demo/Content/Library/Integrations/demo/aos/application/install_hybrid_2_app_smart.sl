@@ -46,16 +46,6 @@ flow:
         navigate:
           - 'TRUE': get_db_endpoint
           - 'FALSE': is_java_8
-    - authorize_db_ingress:
-        do:
-          Integrations.aws.cli.authorize_db_ingress:
-            - instance_arn: '${db_instance_arn}'
-            - ip_address: '${as_ip}'
-        publish:
-          - db_port
-        navigate:
-          - SUCCESS: is_java_8
-          - FAILURE: on_failure
     - is_java_8:
         do:
           io.cloudslang.base.utils.is_true:
@@ -112,18 +102,6 @@ flow:
         navigate:
           - FAILURE: on_failure
           - SUCCESS: SUCCESS
-    - get_db_endpoint:
-        do:
-          Integrations.aws.cli.get_db_endpoint:
-            - instance_arn: '${db_ip}'
-        publish:
-          - db_host: '${endpoint_host}'
-          - db_port: '${endpoint_port}'
-          - db_instance_arn: '${instance_arn}'
-          - db_ip: '${endpoint_host}'
-        navigate:
-          - FAILURE: on_failure
-          - SUCCESS: authorize_db_ingress
     - is_azure_db_provider:
         do:
           io.cloudslang.base.utils.is_true:
@@ -147,6 +125,28 @@ flow:
         navigate:
           - SUCCESS: is_local_db
           - FAILURE: on_failure
+    - get_db_endpoint:
+        do:
+          Integrations.aws.get_db_endpoint:
+            - instance_arn: '${db_ip}'
+        publish:
+          - db_host: '${endpoint_host}'
+          - db_port: '${endpoint_port}'
+          - db_instance_arn: '${instance_arn}'
+          - db_ip: '${endpoint_host}'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: authorize_db_ingress
+    - authorize_db_ingress:
+        do:
+          Integrations.aws.authorize_db_ingress:
+            - instance_arn: '${db_instance_arn}'
+            - source_ip: '${as_ip}'
+        publish:
+          - db_port
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: is_java_8
   outputs:
     - as_ip: '${as_ip}'
     - db_ip: '${db_ip}'
@@ -165,14 +165,14 @@ extensions:
         x: 404
         'y': 472
       authorize_db_ingress:
-        x: 39
-        'y': 601
+        x: 43
+        'y': 630
       downgrade_java:
         x: 216
         'y': 467
       get_db_endpoint:
-        x: 34
-        'y': 444
+        x: 42
+        'y': 451
       is_azure_db_provider:
         x: 402
         'y': 285
