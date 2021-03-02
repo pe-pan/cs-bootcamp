@@ -4,7 +4,8 @@ flow:
   inputs:
     - host
     - username
-    - password
+    - password:
+        required: false
     - url
   workflow:
     - extract_filename:
@@ -36,6 +37,7 @@ flow:
             - destination_password:
                 value: '${password}'
                 sensitive: true
+            - destination_private_key_file: "${get_sp('aws_cert_file_path') if password is None else None}"
             - known_hosts_policy: null
         navigate:
           - SUCCESS: SUCCESS

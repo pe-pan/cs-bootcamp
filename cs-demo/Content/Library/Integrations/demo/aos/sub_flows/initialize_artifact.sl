@@ -4,7 +4,8 @@ flow:
   inputs:
     - host
     - username
-    - password
+    - password:
+        required: false
     - artifact_url:
         required: false
     - script_url
@@ -35,7 +36,7 @@ extensions:
     steps:
       retry_initialize_artifact:
         x: 181
-        y: 131
+        'y': 131
         navigate:
           91ef2ab1-259c-a2a7-c273-8b1892b00801:
             targetId: 4012d319-d667-dea9-65f4-2b24e29f9ae5
@@ -44,4 +45,4 @@ extensions:
       SUCCESS:
         4012d319-d667-dea9-65f4-2b24e29f9ae5:
           x: 394
-          y: 124
+          'y': 124

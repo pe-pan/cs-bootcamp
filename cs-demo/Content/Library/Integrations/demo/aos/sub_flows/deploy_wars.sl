@@ -8,7 +8,8 @@ flow:
     - db_host:
         required: true
     - username
-    - password
+    - password:
+        required: false
     - db_username
     - db_password
     - url: "${get_sp('war_repo_root_url')}"

@@ -4,7 +4,8 @@ flow:
   inputs:
     - host
     - username
-    - password
+    - password:
+        required: false
     - filename
   workflow:
     - delete_file:
@@ -16,6 +17,7 @@ flow:
             - password:
                 value: '${password}'
                 sensitive: true
+            - private_key_file: "${get_sp('aws_cert_file_path') if password is None else None}"
         navigate:
           - SUCCESS: SUCCESS
           - FAILURE: on_failure
@@ -27,7 +29,7 @@ extensions:
     steps:
       delete_file:
         x: 89
-        y: 89
+        'y': 89
         navigate:
           3da31db5-f2f0-fc89-9797-3f3a7cf79852:
             targetId: 1a4b4e41-715c-4454-4553-8668c9592a94
@@ -36,4 +38,4 @@ extensions:
       SUCCESS:
         1a4b4e41-715c-4454-4553-8668c9592a94:
           x: 276
-          y: 100
+          'y': 100

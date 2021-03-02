@@ -4,6 +4,7 @@ flow:
   inputs:
     - username
     - password:
+        required: false
         sensitive: true
     - tomcat_host
     - account_service_host:
