@@ -2,6 +2,8 @@
 #!!
 #! @input instance_id: Service instance ID
 #! @input properties_mapping: Mapping where to take IP addresses from; one of the component will have the IP filled-in
+#!
+#! @output db_instance_arn: Given only if db_provider is AWS
 #!!#
 ########################################################################################################################
 namespace: Integrations.demo.aos.application
@@ -43,6 +45,7 @@ flow:
             - bool_value: "${str(db_provider == 'aws')}"
         publish:
           - db_port: '5432'
+          - db_instance_arn: ''
         navigate:
           - 'TRUE': get_db_endpoint
           - 'FALSE': is_java_8
@@ -152,6 +155,8 @@ flow:
     - db_ip: '${db_ip}'
     - as_provider: '${as_provider}'
     - db_provider: '${db_provider}'
+    - db_instance_arn: '${db_instance_arn}'
+    - app_url: "${'http://%s:8080/#/' % as_ip}"
   results:
     - FAILURE
     - SUCCESS
@@ -162,7 +167,7 @@ extensions:
         x: 588
         'y': 284
       configure_azure_db:
-        x: 404
+        x: 401
         'y': 472
       authorize_db_ingress:
         x: 43
@@ -193,10 +198,10 @@ extensions:
         x: 37
         'y': 285
       install_postgres:
-        x: 595
+        x: 591
         'y': 471
     results:
       SUCCESS:
         469c3346-67f8-8140-306a-4a2881899277:
-          x: 783
+          x: 777
           'y': 112
